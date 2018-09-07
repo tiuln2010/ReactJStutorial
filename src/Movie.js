@@ -5,18 +5,17 @@ class Movie extends Component {
     render () {
         return (
             <div>
-                <MoviePoster />
-                <h1>hello this is a movie</h1>
+                <MoviePoster poster={this.props.poster} />
+                <h1>{this.props.title}</h1>
             </div>
         );
     }
-
 }
 
 class MoviePoster extends Component {
     render() {
         return(
-            <img src="https://upload.wikimedia.org/wikipedia/en/3/39/The_Hunger_Games_cover.jpg" />
+            <img src={this.props.poster} />
         )
     }
 }
