@@ -10,47 +10,42 @@ class App extends Component {
 // update componentWillMount() -> shouldcomponentUpdate() -> rnder() -> componentDidUpdate()
 
   state = {
-    greeting: 'Hello',
-    movies : [
-      {
-        title: "HungerGame",
-        poster: "https://upload.wikimedia.org/wikipedia/en/3/39/The_Hunger_Games_cover.jpg",
-      },
-
-      {
-        title: "Oldboy",
-        poster: "https://upload.wikimedia.org/wikipedia/en/3/39/The_Hunger_Games_cover.jpg",
-      },
-
-      {
-        title: "Star wars",
-        poster: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Star_Wars_Logo.svg/220px-Star_Wars_Logo.svg.png"
-      }
-
-    ]
   }
 
   componentDidMount() {
     setTimeout(() => {
       this.setState({
-        movies: [
-          ...this.state.movies, // bring old state movies, and then add something.
+        movies : [
           {
-            title: "transpotting",
-            poster: "http://image.cine21.com/IMGDB/poster/2001/0706/large/172352_18"
+            title: "HungerGame",
+            poster: "https://upload.wikimedia.org/wikipedia/en/3/39/The_Hunger_Games_cover.jpg",
+          },
+
+          {
+            title: "Oldboy",
+            poster: "https://upload.wikimedia.org/wikipedia/en/3/39/The_Hunger_Games_cover.jpg",
+          },
+
+          {
+            title: "Star wars",
+            poster: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Star_Wars_Logo.svg/220px-Star_Wars_Logo.svg.png"
           }
         ]
       })
     }, 2000)
   }
 
+  _renderMovies = () => { // 자체 기능은 _로 시작하게 한다. 
+    const movies = this.state.movies.map((movie, index) => {
+      return <Movie title={movie.title} poster={movie.poster} key= {index} />
+    })
+    return movies
+  }
+
   render() {
     return (
       <div className="App">
-        {this.state.greeting}
-        {this.state.movies.map((movie, index) => {
-          return <Movie title={movie.title} poster={movie.poster} key={index} />
-        })}
+        {this.state.movies ? this._renderMovies(): 'Loading'}
       </div>
     );
   }
